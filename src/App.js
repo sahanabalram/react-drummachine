@@ -35,12 +35,19 @@ class DrumPad extends Component{
 }
 
 class App extends Component {
-
+  constructor(props){
+    super(props)
+    this.state = {
+      display: ''
+    }
+}
+  handleDisplay = display =>this.setState({display})
   
   render() {
     return (
-      <div id="drum-machine" className="App">
-        <h1 id="display">
+      <div id="drum-machine">
+        <div id="display">{this.state.display}</div>
+        <div id="drum-pads">
           {data.map(d => (
             <DrumPad 
             id={d.id}
@@ -48,7 +55,7 @@ class App extends Component {
             src={d.src}
            />
           ))}
-        </h1>
+        </div>
       </div>
     );
   }
