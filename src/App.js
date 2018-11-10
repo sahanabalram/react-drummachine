@@ -17,6 +17,7 @@ class DrumPad extends Component{
 
   componentDidMount(){
     document.addEventListener('keydown', this.handleKeydown);
+    window.focus();
   }
 
   componentWillMount(){
@@ -55,7 +56,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      display: ''
+      display: 'Click or press Key'
     }
 }
   handleDisplay = display =>this.setState({display})
