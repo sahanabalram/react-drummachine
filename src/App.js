@@ -14,20 +14,40 @@ const data = [
 ]
 
 class DrumPad extends Component{
-
+  handleClick = () =>{
+    this.audio.play();
+    this.audio.currentTime = 0;
+    this.props.handleDisplay =(this.props.id);
+  }
   render(){
     return(
-      <div className="drum-pad">
+      <div className="drum-pad" id={this.props.id} onClick={this.handleClick}>
+        <p>{this.props.letter}</p>
+        <audio className="clip"
+        /* reference the actual DOM element for the audio to play that particular component */
+          ref={ref => this.audio = ref}
+          src={this.props.src} 
+          id={this.props.letter}>
+        </audio>
       </div>
     )
   }
 }
 
 class App extends Component {
+
+  
   render() {
     return (
       <div id="drum-machine" className="App">
         <h1 id="display">
+          {data.map(d => (
+            <DrumPad 
+            id={d.id}
+            letter={d.letter}
+            src={d.src}
+           />
+          ))}
         </h1>
       </div>
     );
