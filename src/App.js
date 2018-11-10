@@ -16,18 +16,19 @@ const data = [
 class DrumPad extends Component{
 
   componentDidMount(){
-    document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keydown', this.handleKeydown);
   }
 
   componentWillMount(){
-    document.removeEventListener('keydown', this.handleKeyDown);
+    document.removeEventListener('keydown', this.handleKeydown);
   }
 
-  handleKeyDown = e => {
-    if(e.keyCode = this.props.letter.charCodeAt()){
-      this.audio.play();
-      this.audio.currentTime = 0;
-      this.props.handleDisplay(this.props.id);
+  
+  handleKeydown = e => {
+    if(e.keyCode === this.props.letter.charCodeAt()) {
+      this.audio.play()
+      this.audio.currentTime = 0
+      this.props.handleDisplay(this.props.id)
     }
   }
   handleClick = () =>{
