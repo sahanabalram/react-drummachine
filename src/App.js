@@ -14,15 +14,31 @@ const data = [
 ]
 
 class DrumPad extends Component{
+
+  componentDidMount(){
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillMount(){
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown = e => {
+    if(e.keyCode = this.props.letter.charCodeAt()){
+      this.audio.play();
+      this.audio.currentTime = 0;
+      this.props.handleDisplay(this.props.id);
+    }
+  }
   handleClick = () =>{
     this.audio.play();
     this.audio.currentTime = 0;
-    this.props.handleDisplay =(this.props.id);
+    this.props.handleDisplay(this.props.id);
   }
   render(){
     return(
       <div className="drum-pad" id={this.props.id} onClick={this.handleClick}>
-        <p>{this.props.letter}</p>
+        <h1>{this.props.letter}</h1>
         <audio className="clip"
         /* reference the actual DOM element for the audio to play that particular component */
           ref={ref => this.audio = ref}
@@ -42,7 +58,7 @@ class App extends Component {
     }
 }
   handleDisplay = display =>this.setState({display})
-  
+
   render() {
     return (
       <div id="drum-machine">
@@ -53,6 +69,7 @@ class App extends Component {
             id={d.id}
             letter={d.letter}
             src={d.src}
+            handleDisplay ={this.handleDisplay}
            />
           ))}
         </div>
